@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace InventoryAPI.Models
+namespace InventoryAPI.DTOs
 {
-    public record Client
+    public class ClientDTO
     {
         public Guid Id { get; init; }
         public string Name { get; init; }

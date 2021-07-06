@@ -27,3 +27,15 @@ C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\obj\Debug\net5.0\Invento
 C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\obj\Debug\net5.0\ref\InventoryAPI.dll
 C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\obj\Debug\net5.0\InventoryAPI.pdb
 C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\obj\Debug\net5.0\InventoryAPI.genruntimeconfig.cache
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\DnsClient.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\MongoDB.Bson.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\MongoDB.Driver.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\MongoDB.Driver.Core.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\MongoDB.Libmongocrypt.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\SharpCompress.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\win\native\libzstd.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\win\native\snappy32.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\win\native\snappy64.dll
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\Jeremy\RiderProjects\InventoryAPI\InventoryAPI\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
