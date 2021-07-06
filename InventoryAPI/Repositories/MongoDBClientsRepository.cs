@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InventoryAPI.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -20,32 +21,32 @@ namespace InventoryAPI.Repositories
             _clientsCollection = database.GetCollection<Client>( _collectionName );
         }
         
-        public Client GetClient(Guid clientID)
+        public async Task<Client> GetClientAsync(Guid clientID)
         {
             var filter = _filterBuilder.Eq(client => client.Id, clientID);
-            return _clientsCollection.Find(filter).SingleOrDefault();
+            return await _clientsCollection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public IEnumerable<Client> GetClients()
+        public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            return _clientsCollection.Find(new BsonDocument()).ToList();
+            return await _clientsCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public void CreateClient(Client client)
+        public async Task CreateClientAsync(Client client)
         {
-            _clientsCollection.InsertOne( client );
+            await _clientsCollection.InsertOneAsync( client );
         }
 
-        public void UpdateClient(Client client)
+        public async Task UpdateClientAsync(Client client)
         {
             var filter = _filterBuilder.Eq(existingClient => existingClient.Id, client.Id);
-            _clientsCollection.ReplaceOne(filter, client);
+            await _clientsCollection.ReplaceOneAsync(filter, client);
         }
 
-        public void DeleteClient(Guid id)
+        public async Task DeleteClientAsync(Guid id)
         {
             var filter = _filterBuilder.Eq(client => client.Id, id);
-            _clientsCollection.DeleteOne(filter);
+            await _clientsCollection.DeleteOneAsync(filter);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InventoryAPI.Models;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace InventoryAPI.Repositories
 {
@@ -27,20 +27,32 @@ namespace InventoryAPI.Repositories
             }
         };
 
-        public IEnumerable<Client> GetClients() => clients;
-        public Client GetClient( Guid clientID ) => clients.SingleOrDefault(client => client.Id == clientID );
-        public void CreateClient(Client client) => clients.Add( client );
+        public async Task<IEnumerable<Client>> GetClientsAsync() => await Task.FromResult( clients );
 
-        public void UpdateClient(Client client)
+        public async Task<Client> GetClientAsync(Guid clientID)
+        {
+            var client = clients.SingleOrDefault(client => client.Id == clientID);
+            return await Task.FromResult(client);
+        }
+
+        public async Task CreateClientAsync(Client client)
+        {
+            clients.Add(client);
+            await Task.CompletedTask;
+        }
+
+        public async Task UpdateClientAsync(Client client)
         {
             var index = clients.FindIndex(existingClient => existingClient.Id == client.Id);
             clients[index] = client;
+            await Task.CompletedTask;
         }
 
-        public void DeleteClient(Guid id)
+        public async Task DeleteClientAsync(Guid id)
         {
             var index = clients.FindIndex(existingClient => existingClient.Id == id);
             clients.RemoveAt(index);
+            await Task.CompletedTask;
         }
     }
 }

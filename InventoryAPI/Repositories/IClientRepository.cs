@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using InventoryAPI.Models;
 
 namespace InventoryAPI.Repositories
 {
     public interface IClientRepository
     {
-        Client GetClient( Guid clientID );
-        IEnumerable<Client> GetClients();
+        Task<Client> GetClientAsync( Guid clientID );
+        Task<IEnumerable<Client>> GetClientsAsync();
 
-        void CreateClient(Client client);
-        void UpdateClient(Client client);
-        void DeleteClient(Guid id);
+        Task CreateClientAsync(Client client);
+        Task UpdateClientAsync(Client client);
+        Task DeleteClientAsync(Guid id);
     }
 }

@@ -42,7 +42,7 @@ namespace InventoryAPI
             });
 
             services.AddSingleton<IClientRepository, MongoDBClientsRepository>();
-            services.AddControllers();
+            services.AddControllers(options => options.SuppressAsyncSuffixInActionNames = false);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "InventoryAPI", Version = "v1"});
@@ -64,7 +64,6 @@ namespace InventoryAPI
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

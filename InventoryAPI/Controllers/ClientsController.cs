@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using InventoryAPI.DTOs;
 using InventoryAPI.Models;
 using InventoryAPI.Repositories;
@@ -20,17 +21,18 @@ namespace InventoryAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ClientDTO> GetClients()
+        public async Task<IEnumerable<ClientDTO>> GetClientsAsync()
         {
-            var clients = _repository.GetClients().Select(client => client.AsDTO());
+            var clients = ( await _repository.GetClientsAsync())
+                .Select(client => client.AsDTO());
 
             return clients;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ClientDTO> GetClient(Guid id)
+        public async Task<ActionResult<ClientDTO>> GetClientAsync(Guid id)
         {
-            var client = _repository.GetClient(id);
+            var client = await _repository.GetClientAsync(id);
 
             if (client is null)
             {
@@ -41,7 +43,7 @@ namespace InventoryAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ClientDTO> CreateClient(CreateClientDTO clientDTO)
+        public async Task<ActionResult<ClientDTO>> CreateClientAsync(CreateClientDTO clientDTO)
         {
             Client client = new()
             {
@@ -51,16 +53,16 @@ namespace InventoryAPI.Controllers
                 CreatedDate = DateTimeOffset.UtcNow
             };
 
-            _repository.CreateClient(client);
+            await _repository.CreateClientAsync(client);
 
-            return CreatedAtAction(nameof(GetClient), new {id = client.Id}, client.AsDTO());
+            return CreatedAtAction(nameof(GetClientAsync), new {id = client.Id}, client.AsDTO());
         }
 
         // PUT /items/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateClient(Guid id, UpdateClientDTO clientDTO)
+        public async Task<ActionResult> UpdateClientAsync(Guid id, UpdateClientDTO clientDTO)
         {
-            var existingClient = _repository.GetClient(id);
+            var existingClient = await _repository.GetClientAsync(id);
 
             if (existingClient is null)
             {
@@ -73,20 +75,20 @@ namespace InventoryAPI.Controllers
                 HorseCount = clientDTO.HorseCount
             };
 
-            _repository.UpdateClient(updatedClient);
+            await _repository.UpdateClientAsync(updatedClient);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteClient(Guid id)
+        public async Task<ActionResult> DeleteClient(Guid id)
         {
-            var existingClient = _repository.GetClient(id);
+            var existingClient = await _repository.GetClientAsync(id);
             if (existingClient is null)
             {
                 return NotFound();
             }
 
-            _repository.DeleteClient(id);
+            await _repository.DeleteClientAsync(id);
             return NoContent();
         }
     }
