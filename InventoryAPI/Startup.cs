@@ -22,6 +22,20 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
+/*
+ * Docker Startup Command:
+ * docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=Pass#word1 --network=net5tutorial mongo
+ *
+ * From Root Directory:
+ * docker build -f InventoryAPI\Dockerfile --force-rm -t catalog:v1 .
+ * 
+ * Production:
+ * docker run -it --rm -p 8080:80 -e MongoDbSettings:Host=mongo -e MongoDbSettings:Password=Pass#word1 --network net5tutorial catalog:v1
+ *
+ * From Docker Hub:
+ * docker run -it --rm -p 8080:80 -e MongoDbSettings:Host=mongo -e MongoDbSettings:Password=Pass#word1 --network net5tutorial jeremylarose/catalog:v1
+ */
+
 namespace InventoryAPI
 {
     public class Startup
@@ -69,7 +83,10 @@ namespace InventoryAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "InventoryAPI v1"));
             }
             
-            app.UseHttpsRedirection();
+            if( env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 
